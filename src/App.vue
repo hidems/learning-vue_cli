@@ -38,20 +38,30 @@ export default {
   methods: {
     clear () {
       this.msg = ''
+    },
+    created() {
+      console.log('created');
+      // Do not work now, Nov 2022
+      fetch('http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+        },
+      })
+      .then( response => {
+        return response.json()
+      })
+      .then( json => {
+        this.msg = json.postalcodes[0].adminName1
+      })
+      .catch( (err) => {
+        this.msg = err // エラー処理
+      });
     }
   },
-  created () {
-    fetch('http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US')
-    .then( response => {
-      return response.json()
-    })
-    .then( json => {
-      this.msg = json.postalcodes[0].adminName1
-    })
-    .catch( (err) => {
-      this.msg = err // エラー処理
-    });
-  }
 }
 </script>
 
