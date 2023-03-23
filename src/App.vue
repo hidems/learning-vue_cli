@@ -1,66 +1,21 @@
 <template>
   <div>
     <myheader></myheader>
-    <p v-if="msg.length > 0">
-      {{ msg }}
-    </p>
-    <p v-else>
-      No Text
-    </p>
-    <input type="text" v-model="msg">
-    <button @click="clear()">clear</button>
-    <button @click="created()">call</button>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <GeoNames></GeoNames>
   </div>
-
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// export default {
-//   name: 'App',
-//   components: {
-//     HelloWorld
-//   }
-// }
+import HelloWorld from './components/HelloWorld.vue'
 import myheader from './components/myheader'
+import GeoNames from './components/GeoNames'
 
 export default {
   components: {
-    myheader
-  },
-  data () {
-    return {
-      msg: 'Hello World'
-    }
-  },
-  methods: {
-    clear () {
-      this.msg = ''
-    },
-    created() {
-      console.log('created');
-      // Do not work now, Nov 2022
-      fetch('http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
-        },
-      })
-      .then( response => {
-        return response.json()
-      })
-      .then( json => {
-        this.msg = json.postalcodes[0].adminName1
-      })
-      .catch( (err) => {
-        this.msg = err // エラー処理
-      });
-    }
+    myheader,
+    GeoNames,
+    HelloWorld,
   },
 }
 </script>
