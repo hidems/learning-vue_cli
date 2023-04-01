@@ -31,15 +31,13 @@ Update vue-cli latest
 npm install -g @vue/cli
 ```
 
-Update webpack latest
+sass-loader node-sass (For webpack 4.* and version 11 can be working only with Webpack later ver 5.*)
+```
+npm install --save-dev node-sass@6 sass-loader@10or
+```
+
+### Attention
+Do not update webpack latest. It would not work after update
 ```
 npm install webpack@latest --save-dev
 ```
-
-sass-loader node-sass
-```
-npm install --save-dev sass-loader node-sass
-or
-npm i -D sass-loader node-sass
-```
-
